@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=IOVDD Pin=C219-1
+Removed Pin From Net: NetName=IOVDD Pin=C221-1
+Removed Pin From Net: NetName=IOVDD Pin=IC7-8
+Removed Pin From Net: NetName=IOVDD Pin=IC8-8
+Added Pin To Net: NetName=VCC Pin=C219-1
+Added Pin To Net: NetName=VCC Pin=C221-1
+Added Pin To Net: NetName=VCC Pin=IC7-8
+Added Pin To Net: NetName=VCC Pin=IC8-8
