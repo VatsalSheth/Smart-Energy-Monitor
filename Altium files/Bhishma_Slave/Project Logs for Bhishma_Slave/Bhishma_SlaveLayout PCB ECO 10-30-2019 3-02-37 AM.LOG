@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=BGND Pin=J105-1
+Added Pin To Net: NetName=IOVDD Pin=J105-1
+Added Member To Class: ClassName=U_EFR32BG13_Slave Member=Component Y102 428-201410-MC01

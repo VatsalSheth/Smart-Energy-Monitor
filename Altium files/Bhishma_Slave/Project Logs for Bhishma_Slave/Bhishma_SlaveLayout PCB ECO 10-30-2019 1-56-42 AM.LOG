@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=DVDD Pin=C102-1
+Removed Pin From Net: NetName=DVDD Pin=C103-1
+Removed Pin From Net: NetName=DVDD Pin=C106-1
+Removed Pin From Net: NetName=DVDD Pin=C108-1
+Removed Pin From Net: NetName=DVDD Pin=IC1-9
+Removed Pin From Net: NetName=DVDD Pin=IC1-18
+Removed Pin From Net: NetName=DVDD Pin=L104-2
+Removed Pin From Net: NetName=DVDD Pin=L105-2
+Added Pin To Net: NetName=PAVDD_MCU Pin=C106-1
+Added Pin To Net: NetName=PAVDD_MCU Pin=C108-1
+Added Pin To Net: NetName=PAVDD_MCU Pin=IC1-18
+Added Pin To Net: NetName=PAVDD_MCU Pin=L105-2
+Added Net: Name=PAVDD_MCU
+Added Pin To Net: NetName=RFVDD_MCU Pin=C102-1
+Added Pin To Net: NetName=RFVDD_MCU Pin=C103-1
+Added Pin To Net: NetName=RFVDD_MCU Pin=IC1-9
+Added Pin To Net: NetName=RFVDD_MCU Pin=L104-2
+Added Net: Name=RFVDD_MCU
