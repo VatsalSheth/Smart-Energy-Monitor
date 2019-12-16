@@ -74,7 +74,9 @@ main.o: ../main.c ../init_mcu.h ../init_board.h ../init_app.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\protocol\bluetooth\bt_mesh\inc\common/bg_errorcodes.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master/src/cmu.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\platform\emlib\inc/em_cmu.h \
- ../src/cmu.h ../src/clk_output.h ../gatt_db.h \
+ ../src/cmu.h ../src/clk_output.h ../src/wiznet5100.h \
+ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\platform\emlib\inc/em_usart.h \
+ ../src/wiznet_spi.h ../src/wiznet5100.h ../gatt_db.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\protocol\bluetooth\bt_mesh\inc\common/bg_gattdb_def.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\protocol\bluetooth\bt_mesh\inc/mesh_generic_model_capi_types.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\protocol\bluetooth\bt_mesh\inc/mesh_lighting_model_capi_types.h \
@@ -252,6 +254,14 @@ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\platform\emlib\inc/e
 ../src/cmu.h:
 
 ../src/clk_output.h:
+
+../src/wiznet5100.h:
+
+C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma_master\platform\emlib\inc/em_usart.h:
+
+../src/wiznet_spi.h:
+
+../src/wiznet5100.h:
 
 ../gatt_db.h:
 

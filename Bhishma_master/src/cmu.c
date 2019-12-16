@@ -14,7 +14,8 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-void cmu_init(void) {
+void cmu_init(void)
+{
 
 	CMU_OscillatorEnable(cmuOsc_HFXO , true, true);// HFXO Oscillator Enable
 	CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFXO);

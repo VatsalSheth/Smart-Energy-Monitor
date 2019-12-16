@@ -17,6 +17,13 @@ SUBDIRS := \
 . \
 hardware/kit/common/bsp \
 hardware/kit/common/drivers \
+ioLibrary_Driver/Application/loopback \
+ioLibrary_Driver/Ethernet/W5100 \
+ioLibrary_Driver/Ethernet/W5100S \
+ioLibrary_Driver/Ethernet/W5200 \
+ioLibrary_Driver/Ethernet/W5300 \
+ioLibrary_Driver/Ethernet/W5500 \
+ioLibrary_Driver/Ethernet \
 lcdGraphics/dmd \
 lcdGraphics/drivers \
 lcdGraphics/glib \
