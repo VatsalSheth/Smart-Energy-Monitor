@@ -12,6 +12,15 @@
  * any purpose, you must agree to the terms of that agreement.
  **************************************************************************************************/
 
+/**************************************************************************************************
+ * This code and all its related files in src folder are written by Sarthak Jain, Hardik Senjaliya
+ * and Vatsal Sheth for the course of Low Power Embedded Design Techniques final project, Bhishma.
+ * Due reference is given to the Silicon Labs btmesh-empty example codes, the framework of which was
+ * used for designing our code.
+ *
+ */
+
+
 /* C Standard Library headers */
 #include <stdlib.h>
 #include <stdio.h>
@@ -103,6 +112,7 @@ static uint16 _my_address = 0; /* Address of the Primary Element of the Node */
 static uint8 switch_pos = 0; /*current position of switch*/
 static uint8 trid = 0; /* transaction identifier */
 static uint8 request_count; /* number of on/off requests to be sent */
+uint8_t safe_to_sendsock = 1;
 
 
 uint8_t server_lpn_address;
@@ -164,6 +174,7 @@ bool mesh_bgapi_listener(struct gecko_cmd_packet *evt);
 #ifndef testing
 uint16_t resnew;
 char passkeyOOB[20];
+char ac_packet[20];
 static uint8 conn_handle = 0xFF; /* handle of the last opened LE connection */
 #endif
 
@@ -383,9 +394,13 @@ int main()
 
 	// Initialization of self-defined functions
 	cmu_init();
-	gpio_init();
-	clock_output();
-//	wiznet5100_init();
+//	gpio_init();
+//	clock_output();
+	if(wiznet5100_init() != 0)
+	{
+		printf("Error Initializing WizNet, check connections\r\n");
+		safe_to_sendsock = 0;
+	}
 
 	gecko_stack_init(&config);
 	gecko_bgapi_class_dfu_init();
@@ -568,6 +583,14 @@ static void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 			uint16_t msg_data = lpn_pstatus->parameters.data[1];
 			msg_data = (msg_data << 8) | lpn_pstatus->parameters.data[0];
 			printf("Server status received: %d \n\r", msg_data);
+
+			if(safe_to_sendsock)
+			{
+				/*Send data received from LPN to remote server*/
+				sprintf(ac_packet, "%d", msg_data);
+				send_socket(ac_packet);
+//				send_socket((uint8_t*)&msg_data);
+			}
 
 			if (evt->data.evt_mesh_generic_client_server_status.server_address == SERVER_LPN1_ADDRESS)
 			{

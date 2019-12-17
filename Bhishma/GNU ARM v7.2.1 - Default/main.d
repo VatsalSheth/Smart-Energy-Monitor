@@ -74,7 +74,11 @@ main.o: ../main.c ../init_mcu.h ../init_board.h ../init_app.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\protocol\bluetooth\bt_mesh\inc\common/bg_errorcodes.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma/src/cmu.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_cmu.h \
- ../src/cmu.h ../src/clk_output.h ../gatt_db.h \
+ ../src/cmu.h ../src/clk_output.h ../src/STPM34.h ../src/LE_UART.h \
+ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_leuart.h \
+ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_core.h \
+ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_common.h \
+ ../gatt_db.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\protocol\bluetooth\bt_mesh\inc\common/bg_gattdb_def.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\protocol\bluetooth\bt_mesh\inc/mesh_generic_model_capi_types.h \
  C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\protocol\bluetooth\bt_mesh\inc/mesh_lighting_model_capi_types.h \
@@ -252,6 +256,16 @@ C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_cmu.h
 ../src/cmu.h:
 
 ../src/clk_output.h:
+
+../src/STPM34.h:
+
+../src/LE_UART.h:
+
+C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_leuart.h:
+
+C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_core.h:
+
+C:\Users\jains\SimplicityStudio\v4_workspace\Bhishma\platform\emlib\inc/em_common.h:
 
 ../gatt_db.h:
 

@@ -12,6 +12,14 @@
  * any purpose, you must agree to the terms of that agreement.
  **************************************************************************************************/
 
+/**************************************************************************************************
+ * This code and all its related files in src folder are written by Sarthak Jain, Hardik Senjaliya
+ * and Vatsal Sheth for the course of Low Power Embedded Design Techniques final project, Bhishma.
+ * Due reference is given to the Silicon Labs btmesh-empty example codes, the framework of which was
+ * used for designing our code.
+ *
+ */
+
 /* C Standard Library headers */
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,6 +36,7 @@
 #include "src/rtcc.h"
 #include "src/cmu.h"
 #include "src/clk_output.h"
+#include "src/STPM34.h"
 
 /* Bluetooth stack headers */
 #include "bg_types.h"
@@ -149,17 +158,22 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 // Flag for indicating DFU Reset must be performed
 uint8_t boot_to_dfu = 0;
 
-const gecko_configuration_t config = { .bluetooth.max_connections =
-		MAX_CONNECTIONS, .bluetooth.max_advertisers = MAX_ADVERTISERS,
-		.bluetooth.heap = bluetooth_stack_heap, .bluetooth.heap_size =
-				sizeof(bluetooth_stack_heap) - BTMESH_HEAP_SIZE,
-		.bluetooth.sleep_clock_accuracy = 100, .gattdb = &bg_gattdb_data,
+const gecko_configuration_t config =
+{
+		.sleep.flags = SLEEP_FLAGS_DEEP_SLEEP_ENABLE,
+		.bluetooth.max_connections = MAX_CONNECTIONS,
+		.bluetooth.max_advertisers = MAX_ADVERTISERS,
+		.bluetooth.heap = bluetooth_stack_heap,
+		.bluetooth.heap_size = sizeof(bluetooth_stack_heap) - BTMESH_HEAP_SIZE,
+		.bluetooth.sleep_clock_accuracy = 100,
+		.gattdb = &bg_gattdb_data,
 		.btmesh_heap_size = BTMESH_HEAP_SIZE,
 #if (HAL_PA_ENABLE) && defined(FEATURE_PA_HIGH_POWER)
 		.pa.config_enable = 1, // Enable high power PA
 		.pa.input = GECKO_RADIO_PA_INPUT_VBAT,// Configure PA input to VBAT
 #endif // (HAL_PA_ENABLE) && defined(FEATURE_PA_HIGH_POWER)
-		.max_timers = 16, };
+		.max_timers = 16,
+};
 
 static void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt);
 void mesh_native_bgapi_init(void);
@@ -254,7 +268,7 @@ static errorcode_t pri_level_update_and_publish(uint16_t element_index)
 	}
 	else
 	{
-		printf("request sent"/*, trid*/);
+//		printf("request sent"/*, trid*/);
 	}
 	return e;
 }
@@ -426,6 +440,7 @@ int main()
 
 	// Initialization of self-defined functions
 	cmu_init();
+	stpm34_init();
 //	gpio_init();
 //	clock_output();
 
@@ -444,14 +459,14 @@ int main()
 
 	gecko_bgapi_class_mesh_node_init();
 //  gecko_bgapi_class_mesh_prov_init();
-	gecko_bgapi_class_mesh_proxy_init();
-	gecko_bgapi_class_mesh_proxy_server_init();
-	gecko_bgapi_class_mesh_proxy_client_init();
+//	gecko_bgapi_class_mesh_proxy_init();
+//	gecko_bgapi_class_mesh_proxy_server_init();
+//	gecko_bgapi_class_mesh_proxy_client_init();
 	gecko_bgapi_class_mesh_generic_client_init();
 #ifdef servercode
 	gecko_bgapi_class_mesh_generic_server_init();
 #endif
-	//  gecko_bgapi_class_mesh_lpn_init();
+	gecko_bgapi_class_mesh_lpn_init();
 	gecko_bgapi_class_mesh_friend_init();
 
 	mesh_native_bgapi_init();
@@ -513,7 +528,11 @@ static void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 					break;
 
 				case GET_AC_READINGS:
-					lightbulb_state.pri_level_target = a++;//rand()%UINT16_MAX;
+					lightbulb_state.pri_level_target = Get_Current();
+					pri_level_update_and_publish(_elem_index);
+					lightbulb_state.pri_level_target = Get_Voltage();
+					pri_level_update_and_publish(_elem_index);
+					lightbulb_state.pri_level_target = Get_Power();
 					pri_level_update_and_publish(_elem_index);
 					break;
 
@@ -583,7 +602,7 @@ static void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 		case gecko_evt_mesh_lpn_friendship_established_id:
 			printf("evt gecko_evt_mesh_lpn_friendship_established, friend_address=%x\r\n",
 					evt->data.evt_mesh_lpn_friendship_established.friend_address);
-			gecko_cmd_hardware_set_soft_timer(5*32768, GET_AC_READINGS, 0);
+			gecko_cmd_hardware_set_soft_timer(4*32768, GET_AC_READINGS, 0);
 			break;
 
 		case gecko_evt_mesh_friend_friendship_terminated_id:
